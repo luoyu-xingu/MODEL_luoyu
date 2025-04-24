@@ -13,7 +13,7 @@ void solve();
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
-    std::cout << std::fixed << std::setprecision(15);
+    
     int t = 1;
     //std::cin >> t;
     while(t--) solve();
@@ -30,11 +30,14 @@ void solve(){
         e[u].emplace_back(v, w);
         e[v].emplace_back(u, w);
     }
+    
     std::vector dis(n + 1, std::vector<ll>(n + 1, Inf));
+    
     auto dijkstra = [&](int s) {
-        dis[s][s] = 0;
         std::vector<int> vis(n + 1);
         std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>,std::greater<std::pair<int, int>>> pq;
+        dis[s][s] = 0;
+        
         pq.emplace(dis[s][s], s);
         while(!pq.empty()) {
             auto [_, u] = pq.top();
@@ -48,14 +51,17 @@ void solve(){
             }
         }
     };
+    
     for(int i = 1; i <= n; i++) {
         dijkstra(i);
     }
+    
     std::vector<int> d(n + 1);
     auto t = d;
     for(int i = 1; i <= n; i++) {
         std::cin >> d[i];
     }
+    
     for(int i = 1; i <= n; i++) {
         std::cin >> t[i];
     }
@@ -73,10 +79,13 @@ void solve(){
     dis = std::vector(n + 1, std::vector<ll>(n + 1, Inf));
 
     dijkstra(1);
+    
     for(int i = 1; i <= n; i++) {
         if(dis[1][i] == Inf) {
             std::cout << -1 << ' ';
+        } 
+        else {
+            std::cout << dis[1][i] << ' ';
         }
-        else std::cout << dis[1][i] << ' ';
     }
 }
