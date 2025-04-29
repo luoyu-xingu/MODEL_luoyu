@@ -27,7 +27,7 @@ void solve() {
       std::cin >> b[i];
     }
 
-    auto convolution=[&](std::vector<int> x, std::vector<int> y) {
+    auto convolution = [&](std::vector<int> x, std::vector<int> y) {
         const double pi = acos(-1);
         int m = x.size() + y.size() - 2;
         int n = 1;
@@ -49,7 +49,7 @@ void solve() {
         for(int i = 0; i < y.size(); i++) {
           b[i] = y[i];
         }
-        auto fft=[&](std::vector<std::complex<double>> &v, int op) {
+        auto fft = [&](std::vector<std::complex<double>> &v, int op) {
             change(v);
             for(int i = 2;i <= n;i <<= 1){
                 std::complex<double> wi({cos(2 * pi / i), sin(2 * pi / i) * op});
