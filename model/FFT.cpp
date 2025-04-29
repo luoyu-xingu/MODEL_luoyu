@@ -26,7 +26,7 @@ void solve() {
     for(int i = 0; i <= m; i++) {
       std::cin >> b[i];
     }
-    
+
     auto convolution=[&](std::vector<int> x, std::vector<int> y) {
         const double pi = acos(-1);
         int m = x.size() + y.size() - 2;
@@ -41,7 +41,7 @@ void solve() {
               if(i > r[i]) std::swap(v[i], v[r[i]]);
             }
         };
-        std::vector<std::complex<double>> a(n + 1),b(n + 1);
+        std::vector<std::complex<double>> a(n + 1), b(n + 1);
         std::vector<int> c(m + 1);
         for(int i = 0 ;i < x.size(); i++) {
           a[i] = x[i];
