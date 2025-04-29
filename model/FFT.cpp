@@ -5,16 +5,20 @@ using ll = long long;
 void solve();
 
 int main() {
-     std::ios::sync_with_stdio(false);
-     std::cin.tie(nullptr);
-     int t = 1;
-     //std::cin >> t;
-     while(t--) solve();
-     return 0;
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    int t = 1;
+    //std::cin >> t;
+    while(t--) {
+      solve();
+    }
+    return 0;
 }
 void solve() {
     int n, m;
     std::cin >> n >> m;
+
     std::vector<int> a(n + 1), b(m + 1);
     for(int i = 0; i <= n; i++) {
       std::cin >> a[i];
@@ -22,7 +26,8 @@ void solve() {
     for(int i = 0; i <= m; i++) {
       std::cin >> b[i];
     }
-    auto convo=[&](std::vector<int> x, std::vector<int> y) {
+    
+    auto convolution=[&](std::vector<int> x, std::vector<int> y) {
         const double pi = acos(-1);
         int m = x.size() + y.size() - 2;
         int n = 1;
@@ -63,7 +68,7 @@ void solve() {
         for(int i = 0; i < n; i++) {
           a[i] = a[i] * b[i];
         }
-        fft(a,-1);
+        fft(a, -1);
         for(int i = 0; i <= m; i++) {
           c[i] = (int)(a[i].real() / n + 0.5);
         }
@@ -71,7 +76,7 @@ void solve() {
     };
 
     
-    auto c=convo(a, b);
+    auto c = convolution(a, b);
     for(auto x : c) {
       std::cout << x << " ";
     }
