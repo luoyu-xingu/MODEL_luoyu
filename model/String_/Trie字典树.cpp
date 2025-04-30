@@ -47,7 +47,7 @@ class Trie {
     }
 
     void query() {
-        // 变动参数
+        // 变动区域
     }
 };
 void solve();
