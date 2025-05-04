@@ -64,7 +64,7 @@ class LazySegment_tree {
             return rangeQuery(2 * p, l, mid, x, y);
         }
 
-        return rangeQuery(2 * p + 1, mid + 1, r, x, y) + rangeQuery(2 * p, l, mid, x, y);
+       return rangeQuery(2 * p, l, mid, x, y) + rangeQuery(2 * p + 1, mid + 1, r, x, y);
     }
 
     public:
