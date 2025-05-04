@@ -142,7 +142,6 @@ int main() {
 
     return 0;
 }
-
 void solve() {
     int n, m, r;
     std::cin >> n >> m >> r >> mod;
@@ -251,3 +250,16 @@ void solve() {
         }
     }
 }
+
+
+/*操作1234
+    1.
+        u, v, k u到v路径上点权加v;
+    2.
+        u, v u到v的点权和；
+    3.
+        u, k 以u为根的子树，每个点权加k;
+    4.
+        u 查询u为根的子树的权值
+*/
+    
