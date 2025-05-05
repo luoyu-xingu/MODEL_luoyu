@@ -36,6 +36,9 @@ class LazySegment_tree {
     }
 
     void rangeApply(int p, int l, int r, int x, int y, Tag v) {
+        if (y < x) {
+            return;
+        }
         if (x <= l and y >= r) {
             apply(p, v);
             return;
@@ -52,6 +55,9 @@ class LazySegment_tree {
     }
 
     Info rangeQuery(int p, int l, int r, int x, int y) {
+        if (y < x) {
+            return Info();
+        }
         if (x <= l and y >= r) {
             return info[p];
         }
@@ -64,7 +70,7 @@ class LazySegment_tree {
             return rangeQuery(2 * p, l, mid, x, y);
         }
 
-       return rangeQuery(2 * p, l, mid, x, y) + rangeQuery(2 * p + 1, mid + 1, r, x, y);
+        return rangeQuery(2 * p, l, mid, x, y) + rangeQuery(2 * p + 1, mid + 1, r, x, y);
     }
 
     public:
