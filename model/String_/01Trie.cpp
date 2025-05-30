@@ -72,3 +72,117 @@ int main() {
     std::cout << tr.query(9e10) << '\n';
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+反正很神奇，/*第八届广西大学生程序设计大赛暨2025邀请赛-G*/
+/*
+#include<bits/stdc++.h>
+
+using ll = long long;
+
+// 01Trie 维护 x 和一堆数字里的最大异或
+template<const int BIT = 30, typename P = int>
+class Trie {
+    class Node {
+        public:
+
+        std::array<int, 2> nxt;
+        std::array<std::array<int, 2>, 2> passed;
+
+        Node () {
+            nxt[0] = nxt[1] = 0;
+            passed[0][0] = passed[0][1] = passed[1][0] = passed[1][1]  = 0;
+        }
+    };
+
+    std::vector<Node> T;
+
+    int newnode() {
+        T.emplace_back(Node());
+        return T.size() - 1;
+    }
+
+    public:
+
+    Trie () {
+        T.assign(2, Node());
+    }
+
+    void add(P x, P y, int t = 1) {
+        int o = 1;
+        for (int i = BIT; i >= 0; i--) {
+            int b1 = x >> i & 1;
+            int b2 = y >> i & 1;
+            int c = b1 ^ b2;
+            if (!T[o].nxt[c]) {
+                T[o].nxt[c] = newnode();
+            }
+            o = T[o].nxt[c];
+            T[o].passed[b1][b2] += t;
+        }
+    }
+
+    template <class U>
+    U query(P x, P y) {
+        int o = 1;
+        U ans = 0;
+        for (int i = BIT; i >= 0; i--) {
+            int b1 = x >> i & 1;
+            int b2 = y >> i & 1;
+            int c = b1 ^ b2;
+            ans += T[T[o].nxt[c ^ 1]].passed[b1][b2 ^ 1];
+            o = T[o].nxt[c];
+        }
+        return ans;
+    }
+};
+    
+void solve();
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    solve();
+    return 0;
+}
+
+void solve() {
+    int n, k1, k2;
+    std::cin >> n >> k1 >> k2;
+    
+    std::vector<int> a(n + 1), b(n + 1);
+    for (int i = 1; i <= n; i++) {
+        std::cin >> a[i];
+    }
+    
+    for (int i = 1; i <= n; i++) {
+        std::cin >> b[i];
+    }
+    
+    Trie<29, int> tr;
+    for (int i = 1; i <= n; i++) {
+        tr.add(a[i], b[i]);
+    }
+    
+    ll ans = 0;
+    for (int i = 1; i <=n ; i++) {
+        tr.add(a[i], b[i], -1);
+        int t1 = k1 ^ a[i];
+        int t2 = k2 ^ b[i];
+        ans += tr.query(t1, t2);
+    }
+
+    std::cout << ans << "\n";
+
+} */
+
