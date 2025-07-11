@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 
 using ll = long long;
-const int mod = 1e9 + 7;
+
 template <typename T>
 class Matrix {
     int n, m;
@@ -32,7 +32,7 @@ class Matrix {
         }
     }
 
-    std::vector<T>& operator[] (int x) {
+    std::vector<T> &operator[] (int x) {
         assert(x < n);
         return val[x];
     }
@@ -82,88 +82,40 @@ class Matrix {
         return tmp;
     }
 
-    template <typename U>
-    friend Matrix Mmul(const Matrix &x, const Matrix &y, U mod) {
-        assert(x.m == y.n);
-        Matrix tmp(x.n, y.m, 0);
-        for (int i = 0; i < x.n; i++) {
-            for (int j = 0; j < y.m; j++) {
-                for (int k = 0; k < y.m; k++) {
-                    tmp[i][j] += x.val[i][k] * y.val[k][j];
-                    tmp[i][j] %= mod;
-                }
-            }
-        }
-        return tmp;
-    }
 
-    template<typename U>
-    Matrix operator% (const U mod) const{
-        auto tmp = val;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (tmp[i][j] < 0) {
-                    tmp[i][j] += mod;
-                } else if (tmp[i][j] >= mod) {
-                    tmp[i][j] -= mod;
-                }
-            }
-        }
-        return {tmp};
-    }
-
-    template<typename U>
-    Matrix operator%= (const U mod) {
-         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (val[i][j] < 0) {
-                    val[i][j] += mod;
-                } else if (val[i][j] >= mod) {
-                    val[i][j] -= mod;
-                }
-            }
-        }
-        return *this;
-    }
-
-    Matrix operator+= (const Matrix &rhs) {
+    Matrix &operator+= (const Matrix &rhs) {
         *this = *this + rhs;
         return *this;
     }
 
-    Matrix operator-= (const Matrix &rhs) {
+    Matrix &operator-= (const Matrix &rhs) {
         *this = *this - rhs;
         return *this;
     }
 
-    Matrix operator*= (const Matrix &rhs) {
+    Matrix &operator*= (const Matrix &rhs) {
         *this = *this * rhs;
         return *this;
     }
 
-    template<typename P>
-    friend Matrix pow(Matrix a, P b) {
-        assert(a.n == a.m);
-        Matrix res(a.n, 1);
-        for (;b; b >>= 1, a = a * a) {
-            if (b & 1) {
-                res = res * a;
+    friend std::istream &operator<< (std::istream &in, Matrix &self) {
+        for (int i = 0; i < self.n; i++) {
+            for (int j = 0; j < self.m; j++) {
+                in >> self.val[i][j];
             }
         }
-        return res;
+        return in;
     }
 
-    template<typename P, typename U>
-    friend Matrix Mpow(Matrix a, P b, U mod) {
-        assert(a.n == a.m);
-        Matrix res(a.n, 1);
-        for (;b; b >>= 1, a = Mmul(a, a, mod)) {
-            if (b & 1) {
-                res = Mmul(res, a, mod);
+    friend std::ostream &operator>> (std::ostream &out, Matrix self) {
+        for (int i = 0; i < self.n; i++) {
+            for (int j = 0; j < self.m; j++) {
+                out << self.val[i][j] << " \n"[j == self.m - 1];
             }
         }
-        return res;
+        return out;
     }
+
 
     int row() {
         return n;
@@ -172,24 +124,3 @@ class Matrix {
         return m;
     }
 };
-
-
-int main() {
-    int n;
-    ll k;
-    std::cin >> n >> k;
-
-    Matrix<ll> a(n);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            std::cin >> a[i][j];
-        }
-    } 
-
-    auto res = Mpow(a, k, mod);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            std::cout << res[i][j] << " \n"[j == n - 1];
-        }
-    }
-}
