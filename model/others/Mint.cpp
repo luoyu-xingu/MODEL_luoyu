@@ -55,8 +55,9 @@ class Mint {
     }
 
     template<class T>
-    Mint operator= (T _x) {
-        x = to(_x);
+    Mint &operator= (const T &_x) {
+        x = _to(_x);
+        return *this;
     }
 
     Mint operator- () const {
