@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 
 using ll = long long;
-
-constexpr int MAXV = 1e5 + 3;
+constexpr int MAXV = 1e6 + 3;
 
 template <class T, class U>
 T qpow(T a, U b) {
@@ -155,8 +154,8 @@ ll invGcd(ll _x, ll y) {
     return m0;
 } 
 
-int Mint::mod = 998244353;
-//int Mint::mod = 1e9 + 7;
+//int Mint::mod = 998244353;
+int Mint::mod = 1e9 + 7;
 using Z = Mint;
 
 class Comb {
@@ -166,7 +165,7 @@ class Comb {
 
     void init(int _n) {
         n = _n;
-        assert(_n <= 1e6 and _n >= 0);
+        assert(_n >= 0);
         fact.assign(n + 1, 1);
         inv.assign(n + 1, 1);
         for (int i = 1; i <= n; i++) {
@@ -174,7 +173,7 @@ class Comb {
         }
 
         inv[n] = 1 / fact[n];
-        for (int i = n - 1 ; i >= 1;i--) {
+        for (int i = n - 1 ; i >= 0;i--) {
             inv[i] = inv[i + 1] * (i + 1);
         }
     }
@@ -188,7 +187,7 @@ class Comb {
 
     Z A(int m, int k) {
         assert(m <= n and k <= n);
-        return fact[m] / fact[m - k];
+        return fact[m] * inv[m - k];
     }
 
     Z C(int m, int k) {
@@ -196,7 +195,7 @@ class Comb {
         if (k < 0 || k > m) {
             return 0;
         }
-        return (fact[m] / fact[k]) / fact[m - k];
+        return fact[m] * inv[k] * inv[m - k];
     }
 
 } comb(MAXV);
